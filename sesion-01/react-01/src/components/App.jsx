@@ -1,32 +1,20 @@
 import ExpenseItem from "./Expenses/ExpenseItem";
 import Card from "./UI/Card"
+import NewExpense from "./NewExpense/NewExpense";
+import { useState } from 'react'
 
 function App(){
 
-  const gastos = [
-    {
-      id : 0,
-      titulo : "Libros",
-      fecha : "Mayo 20 2022",
-      precio : 250
-    },
-    {
-      id : 1,
-      titulo : "Café",
-      fecha : "Abril 25 2022",
-      precio : 50
-    },
-    {
-      id : 2,
-      titulo : "Comida",
-      fecha : "Junio 20 2022",
-      precio : 650
-    },
-  ]
+  const [gastos, setGastos] = useState([]);
+
+  const addExpenseHandler = (expense) => {
+    setGastos(prevState => [...prevState, expense])
+  }
 
   return(
     <div>
       <h1>Hello World</h1>
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Card 
         className="expenses"
       >
@@ -35,7 +23,7 @@ function App(){
           <ExpenseItem
             key = {e.id}
             fecha = {e.fecha}
-            titulo = {e.titulo}
+            title = {e.title}
             precio = {e.precio}
           />)}
       </Card>
