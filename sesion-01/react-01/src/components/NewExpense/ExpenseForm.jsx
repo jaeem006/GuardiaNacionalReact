@@ -1,4 +1,4 @@
-import "./ExpenseForm.css";
+import styles from "./ExpenseForm.module.css";
 import { useState } from 'react';
 
 function ExpenseForm(props) {
@@ -11,6 +11,8 @@ function ExpenseForm(props) {
         precio: 0,
         fecha: ""
     })
+
+    const [isValid, setIsValid] = useState(true)
 
     const titleChangeHandler = (event) => {
         // setTitle(event.target.value);
@@ -33,28 +35,38 @@ function ExpenseForm(props) {
         //     precio
         // }
         // console.log(expense)
+        if (data.title.trim().length === 0){
+            setIsValid(false);
+            return
+        }
         props.onSaveExpense(data)
-        console.log(data)
+        setIsValid(true)
+        setData({
+            title : "",
+            precio : 0,
+            fecha: ""
+        })
     }
   
     return (
         <form onSubmit={submitHandler}>
-        <div className="new-expense-controls">
-            <div className="new-expense-control">
-            <label>Descripción</label>
-            <input type="text" 
-                // value={title}
-                value={data.title}
+        <div className={styles["new-expense-controls"]}>
+            <div 
+                className={`${styles["new-expense-control"]} ${!isValid && styles.invalid}`}>
+                <label>Descripción</label>
+                <input type="text" 
+                    // value={title}
+                    value={data.title}
                 onChange={titleChangeHandler}/>
             </div>
-            <div className="new-expense-control">
+            <div className={styles["new-expense-control"]}>
             <label>Monto</label>
             <input type="number" min="1" step="1" 
                 // value={precio}
                 value={data.precio}
                 onChange={precioChangeHandler}/>
             </div>
-            <div className="new-expense-control">
+            <div className={styles["new-expense-control"]}>
             <label>Fecha</label>
             <input type="date" min="2019-01-01" max="2022-12-31" 
                 // value={fecha}
@@ -62,7 +74,7 @@ function ExpenseForm(props) {
                 onChange={fechaChangeHandler}/>
             </div>
         </div>
-        <div className="new-expense-actions">
+        <div className={styles["new-expense-actions"]}>
             <button type="submit">Agregar</button>
         </div>
         </form>

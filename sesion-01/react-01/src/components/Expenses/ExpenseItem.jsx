@@ -1,13 +1,14 @@
-import "./ExpenseItem.css"
+import styles from "./ExpenseItem.module.css"
 
 function ExpenseItem(props){
-    
+
+  console.log(styles)
     return (
-        <div className="expense-item">
+        <div className={styles["expense-item"]}>
           <div>{props.fecha}</div>
-          <div className="expense-item-description">
+          <div className={styles["expense-item-description"]}>
             <h2>{props.title}</h2>
-            <div className="expense-item-price">${props.precio}</div>
+            <div className={styles["expense-item-price"]}>${props.precio}</div>
           </div>
         </div>
     );
