@@ -12,8 +12,9 @@ function App(){
   }
 
   return(
-    <div>
+    <>
       <h1>Hello World</h1>
+      
       <NewExpense onAddExpense={addExpenseHandler} />
       <Card 
         className="expenses"
@@ -27,7 +28,7 @@ function App(){
             precio = {e.precio}
           />)}
       </Card>
-    </div>
+    </>
   )
 }
 export default App;
