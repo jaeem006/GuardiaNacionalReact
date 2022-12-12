@@ -18,7 +18,7 @@ function emailReducer(state,action){
       return {
         ...state,
         pValue: action.payload,
-        pValid: action.payload.length >= 6
+        pValid: action.payload.length >= 1
       }
     case "INPUT_BLUR" :
       return {
@@ -28,7 +28,7 @@ function emailReducer(state,action){
     case "INPUT_BLUR_P" :
       return {
         ...state,
-        pValid: state.pValue.length >= 6
+        pValid: state.pValue.length >= 1
       }
     default :
       return {
