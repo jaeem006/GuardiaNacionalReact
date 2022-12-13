@@ -35,7 +35,7 @@ export function AuthContextProvider(props){
         fetchUser();
     }, [])
 
-    const loginHandler = async (email, password) => {
+    const loginHandler = async (email, password, callback) => {
         try {
             const res = await axios.post(url,{
                 email : email,
@@ -46,6 +46,7 @@ export function AuthContextProvider(props){
             localStorage.setItem("isLoggedIn","1")
             localStorage.setItem("token",res.data.user.token)
             setIsLoggedIn(true);
+            callback()
         } catch(e) {
             alert("Fallo la autenticación")
         }

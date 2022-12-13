@@ -4,6 +4,7 @@ import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
 import styles from "./Login.module.css";
 import AuthContext from "../../context/AuthContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function emailReducer(state,action){
   switch(action.type){
@@ -41,6 +42,10 @@ function emailReducer(state,action){
 }
 
 function Login() {
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const [emailState, dispatchEmail] = useReducer(emailReducer,{
     value : "",
@@ -90,9 +95,12 @@ function Login() {
    dispatchEmail({type: "INPUT_BLUR_P"})
   };
 
+  
   const submitHandler = (event) => {
     event.preventDefault();
-    onLogin(value, pValue);
+    onLogin(value, pValue,() => {
+      navigate(from, { replace : true })
+    });
   };
 
   return (
