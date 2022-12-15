@@ -1,13 +1,12 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
-function App(){
-    const [text, setText] = useState("");
+function App2() {
+  const [text, setText] = useState("");
 
   const changeHandler = (event) => setText(event.target.value);
 
   return (
-    <>
+    <React.Fragment>
       <h1>{text}</h1>
       <input
         type="text"
@@ -15,8 +14,8 @@ function App(){
         value={text}
         onChange={changeHandler}
       />
-    </>
+    </React.Fragment>
   );
 }
 
-export default App
+export default App2;

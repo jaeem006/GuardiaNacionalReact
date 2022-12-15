@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App2 from "./App2";
-import '@testing-library/jest-dom';
 
 describe("App Component", () => {
 
@@ -16,7 +15,10 @@ describe("App Component", () => {
         const input = screen.getByPlaceholderText("Title");
         expect(input).toBeInTheDocument;
         expect(input).toHaveValue("");
-
-        
+    
+        const expectedValue = "Buenos dias"
+    
+        userEvent.type(input, expectedValue);
+        // expect(input).toHaveValue(expectedValue);
     });
 })
